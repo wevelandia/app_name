@@ -1,0 +1,54 @@
+<h2 class="content-block">Filtros</h2>
+
+<div>
+  <div class="dx-fieldset">
+    <div class="dx-field">
+      <div class="dx-field-label"> Multi-tag for several items </div>
+      <div class="dx-field-value">
+        <dx-tag-box
+          [items]="orderNumbers"
+          [value]="orderNumbers"
+          [showSelectionControls]="true"
+          selectAllMode="allPages"
+          [maxDisplayedTags]="3"
+          [inputAttr]="{ 'aria-label': 'OrderNumber' }"
+          (onValueChanged)="onTagBoxValueChanged($event)"
+        ></dx-tag-box>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <!-- Contenedor de Filtros -->
+   <!-- Filtro para Order Number (selección única) -->
+  <dx-select-box
+    [items]="orderNumbers"
+    placeholder="Filtrar por Número de Orden"
+    [(value)]="filters.OrderNumber"
+    (onValueChanged)="applyFilters()">
+  </dx-select-box>
+
+
+  <!-- Tabla con dx-data-grid -->
+  <dx-data-grid
+    [dataSource]="filteredOrders"
+    [showBorders]="true"
+    [columnAutoWidth]="true">
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+    <!-- Definición de columnas -->
+    <dxi-column dataField="ID" caption="ID"></dxi-column>
+    <dxi-column dataField="OrderNumber" caption="Order Number"></dxi-column>
+    <dxi-column dataField="OrderDate" caption="Order Date"></dxi-column>
+    <dxi-column dataField="DeliveryDate" caption="Delivery Date"></dxi-column>
+    <dxi-column dataField="SaleAmount" caption="Sale Amount" format="currency"></dxi-column>
+    <dxi-column dataField="Terms" caption="Terms"></dxi-column>
+    <dxi-column dataField="CustomerStoreCity" caption="Customer City"></dxi-column>
+    <dxi-column dataField="Employee" caption="Employee"></dxi-column>
+
+  </dx-data-grid>
+</div>
